@@ -5,12 +5,14 @@
 === On all environment
 
 First you need to download the latest version of those plugins, and put them inside the `plugins` directory  : 
-  - APOC : https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/
-  - Graph Algos : https://github.com/neo4j-contrib/neo4j-graph-algorithms/releases/
+
+* APOC : https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/
+* Graph Algos : https://github.com/neo4j-contrib/neo4j-graph-algorithms/releases/
   
 For example, the current when I write this file are : 
-  - https://github.com/neo4j-contrib/neo4j-graph-algorithms/releases/download/3.5.3.1/graph-algorithms-algo-3.5.3.1.jar
-  - https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/3.5.0.2/apoc-3.5.0.2-all.jar 
+
+* https://github.com/neo4j-contrib/neo4j-graph-algorithms/releases/download/3.5.3.1/graph-algorithms-algo-3.5.3.1.jar
+* https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/3.5.0.2/apoc-3.5.0.2-all.jar 
   
 
 Then you just have to run `docker-compose up`
