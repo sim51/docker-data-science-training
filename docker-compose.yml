@@ -1,7 +1,7 @@
 version: '3'
 services:
   training-neo4j:
-    image: neo4j:${NEO4J_VERSION:-latest}-enterprise
+    image: neo4j:${NEO4J_VERSION:-latest}
     container_name: "data-science-training-neo4j"
     volumes:
       - ./plugins:/plugins

@@ -1,8 +1,10 @@
 = Docker environment for the data science training
 
-== Launch the env 
+== Launch the environment
 
 === On all environment
+
+==== Step 1 : Download neo4j plugins
 
 First you need to download the latest version of those plugins, and put them inside the `plugins` directory  : 
 
@@ -13,24 +15,24 @@ For example, the current when I write this file are :
 
 * https://github.com/neo4j-contrib/neo4j-graph-algorithms/releases/download/3.5.3.1/graph-algorithms-algo-3.5.3.1.jar
 * https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/3.5.0.2/apoc-3.5.0.2-all.jar 
-  
 
-Then you just have to run `docker-compose up`
+==== Step 2 : Clone the training repository
+
+In this directory, just clone the training repository : `git clone https://github.com/mneedham/data-science-training`
+
+==== Step 3 : Launch docker 
+
+You just have to run `docker-compose up`
 
 === On linux
 
 On linux you can directly run the script `run.sh`, it will download everything you need and also run the `docker-compose up` command for you.
 
-== Next steps 
 
-=== Neo4j : change the password
+== Use the environment
 
-Go to http://localhost:7474/browser, put the default login/password (ie. neo4j /neo4j ), and you will be asked for the new admin.
+Your Neo4j database is available on your laptop at this url http://localhost:7474/browser with the following login/password -> neo4j / admin
+But inside other container (like the jupyter one) your should use `bolt://data-science-training-neo4j`.
 
-=== Jupyter
-
-Search the Jupyter `token` inside the logs of docker. You should see something similar to that : `[I 17:39:57.299 NotebookApp] http://(9d6f11a3c1a1 or 127.0.0.1):8888/?token=04833158d59cd1ac094602f9b097822a904fa285607e1c59`
-
-Then go to http://localhost:8888/ and copy to the token
-
-IMPORTANT: The Neo4j URL for the notebook is `bolt://data-science-training-neo4j`
+Jupyter is available at the following url http://localhost:8888/
+To login, you will need to search the token in the docker logs something. You should see something similar to that : `[I 17:39:57.299 NotebookApp] http://(9d6f11a3c1a1 or 127.0.0.1):8888/?token=04833158d59cd1ac094602f9b097822a904fa285607e1c59`

@@ -11,7 +11,9 @@ NEO4J_ALGO_VERSION="3.5.3.1"
 
 # Download training
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-git clone $TRAINING_GIT_URL
+if [ ! -d "./data-science-training" ]; then
+  git clone $TRAINING_GIT_URL
+fi
 
 # Download neo4j's plugins
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -21,7 +23,7 @@ curl -L https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download
 
 # Docker part
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-export NEO4J_VERSION=$NEO4J_VERSION 
+export NEO4J_VERSION="$NEO4J_VERSION-enterprise"
 export JUPYTER_VERSION=$JUPYTER_VERSION
 docker rm -f `docker ps -aq -f name=data-science-training*`
 docker-compose up
