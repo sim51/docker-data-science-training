@@ -6,19 +6,30 @@
 TRAINING_GIT_URL="https://github.com/mneedham/data-science-training"
 JUPYTER_VERSION="latest"
 NEO4J_VERSION="3.5.3"
-NEO4J_APOC_VERSION="3.5.0.2"
-NEO4J_ALGO_VERSION="3.5.3.1"
 
 # Download training
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 if [ ! -d "./data-science-training" ]; then
   git clone $TRAINING_GIT_URL
+else
+  cd ./data-science-training
+  git pull
+  cd ..
 fi
 
 # Download neo4j's plugins
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-curl -L https://github.com/neo4j-contrib/neo4j-graph-algorithms/releases/download/$NEO4J_ALGO_VERSION/graph-algorithms-algo-$NEO4J_ALGO_VERSION.jar > ./plugins/graph-algorithms-algo-$NEO4J_ALGO_VERSION.jar
-curl -L https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/$NEO4J_APOC_VERSION/apoc-$NEO4J_APOC_VERSION-all.jar > ./plugins/apoc-$NEO4J_APOC_VERSION-all.jar
+rm -rf ./plugins
+mkdir ./plugins
+cd ./plugins
+URL_GRAPH_ALGO=$(curl -s https://raw.githubusercontent.com/neo4j-contrib/neo4j-graph-algorithms/master/versions.json | jq -r ".[] | select(.neo4j | contains(\"$NEO4J_VERSION\") ) | .jar")
+curl -O -s $URL_GRAPH_ALGO
+
+
+URL_APOC=$(curl -s https://raw.githubusercontent.com/neo4j-contrib/neo4j-apoc-procedures/master/versions.json | jq -r ".[] | select(.neo4j | contains(\"$NEO4J_VERSION\") ) | .jar")
+curl -O -s $URL_APOC
+
+cd ..
 
 
 # Docker part
